@@ -52,5 +52,6 @@ INSERT INTO c4d_subject (id, name) VALUES ('ME', 'Moi')^;
 INSERT INTO c4d_entry_type_category (id, name, duration, position) VALUES ('NOTE', 'Note', 'ENABLED', 'ENABLED')^;
 INSERT INTO c4d_entry_type_category (id, name, duration, position) VALUES ('PHYSICAL_ACTIVITY', 'Activité physique', 'REQUIRED', 'ENABLED')^;
 INSERT INTO c4d_entry_type_category (id, name, duration, position) VALUES ('INTELLECTUAL_ACTIVITY', 'Activité intellectuelle', 'REQUIRED', 'ENABLED')^;
+INSERT INTO c4d_entry_type_category (id, name, duration, position) VALUES ('WORK', 'Travail', 'REQUIRED', 'ENABLED')^;
 INSERT INTO c4d_entry_type_category (id, name, duration, position) VALUES ('SYMPTOM', 'Symptôme', 'ENABLED', 'DISABLED')^;
 INSERT INTO c4d_entry_type_category (id, name, duration, position) VALUES ('RESOURCE', 'Resource', 'DISABLED', 'REQUIRED')^;

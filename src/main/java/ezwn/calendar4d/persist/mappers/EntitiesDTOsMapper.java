@@ -4,10 +4,12 @@ import ezwn.calendar4d.persist.dto.EntryDTO;
 import ezwn.calendar4d.persist.dto.EntryTypeDTO;
 import ezwn.calendar4d.persist.dto.PhysicalActivityDTO;
 import ezwn.calendar4d.persist.dto.PhysicalActivityStatsDTO;
+import ezwn.calendar4d.persist.dto.SubjectEntryTypeDTO;
 import ezwn.calendar4d.persist.schema.Entry;
 import ezwn.calendar4d.persist.schema.EntryType;
 import ezwn.calendar4d.persist.schema.PhysicalActivity;
 import ezwn.calendar4d.persist.schema.PhysicalActivityStats;
+import ezwn.calendar4d.persist.schema.SubjectEntryType;
 
 public class EntitiesDTOsMapper {
    
@@ -41,6 +43,22 @@ public class EntitiesDTOsMapper {
       entryTypeDTO.setName(entryType.getName());
       entryTypeDTO.setPhysicalActivity(entryType.getPhysicalActivity());
       return entryTypeDTO;
+   }
+   
+   public static SubjectEntryType toEntity(final SubjectEntryTypeDTO subjectEntryTypeDTO) {
+      final var subjectEntryType = new SubjectEntryType();
+      subjectEntryType.setId(subjectEntryTypeDTO.getId());
+      subjectEntryType.setSubject(subjectEntryTypeDTO.getSubject());
+      subjectEntryType.setEntryType(subjectEntryTypeDTO.getEntryType());
+      return subjectEntryType;
+   }
+   
+   public static SubjectEntryTypeDTO toDTO(final SubjectEntryType subjectEntryType) {
+      final var subjectEntryTypeDTO = new SubjectEntryTypeDTO();
+      subjectEntryTypeDTO.setId(subjectEntryType.getId());
+      subjectEntryTypeDTO.setSubject(subjectEntryType.getSubject());
+      subjectEntryTypeDTO.setEntryType(subjectEntryType.getEntryType());
+      return subjectEntryTypeDTO;
    }
    
    public static Entry toEntity(final EntryDTO entryDTO) {

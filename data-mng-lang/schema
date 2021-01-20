@@ -1,11 +1,11 @@
 
-# 08/12/2020 08:15:00
+# 20/01/2021 12:37:00
 
-struct Subject
+struct Topic
     #id: text(16)
     name: text
 
-finite space<Subject>
+finite space<Topic>
     "ME" 				"Moi"
 
 struct PhysicalActivity
@@ -41,6 +41,7 @@ finite space<EntryTypeCategory>
     "NOTE" 					"Note"						"ENABLED"	"ENABLED"
     "PHYSICAL_ACTIVITY" 	"Activité physique"			"REQUIRED"	"ENABLED"
 	"INTELLECTUAL_ACTIVITY"	"Activité intellectuelle"	"REQUIRED"	"ENABLED"
+	"WORK"					"Travail"					"REQUIRED"	"ENABLED"
     "SYMPTOM"   			"Symptôme"					"ENABLED"	"DISABLED"
     "RESOURCE"				"Resource"					"DISABLED"	"REQUIRED"
 
@@ -80,10 +81,17 @@ space<EntryType>
     "RHINITIS"				"SYMPTOM"					"Rhinite"				null
     "BACK_PAIN"      		"SYMPTOM"					"Mal au dos"			null
 
+struct TopicEntryType
+    #id: text(16)
+	topic: Topic
+	entryType: EntryType
+	
+space<TopicEntryType>
+	""	""	""
+
 struct Entry
     #id: text(16)
     type: EntryType
-	subject: Subject
     time: datetime
     duration: duration[0..1]
 	latitude: decimal(3,9)[0..1]
