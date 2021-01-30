@@ -8,6 +8,9 @@ CREATE VIEW c4d_physical_activity_stats AS
 	    GROUP BY DATE(time)
 	    ORDER BY date DESC^;
 
+INSERT INTO c4d_user (user_name, password) VALUES ('nicolas', 'a1*a1*a1*')^;
+INSERT INTO c4d_user (user_name, password) VALUES ('anne', 'a1*a1*a1*')^;
+
 INSERT INTO c4d_entry_type (id, category, name, physical_activity) VALUES ('NOTE', 'NOTE', 'Note', NULL)^;
 INSERT INTO c4d_entry_type (id, category, name, physical_activity) VALUES ('RESOURCE', 'RESOURCE', 'Ressource', NULL)^;
 INSERT INTO c4d_entry_type (id, category, name, physical_activity) VALUES ('WALKING_SLOW', 'PHYSICAL_ACTIVITY', 'Marche lente', 'WALKING_SLOW')^;

@@ -1,5 +1,13 @@
 
-# 08/12/2020 08:15:00
+# 30/01/2021 16:20:00
+
+struct User
+    #userName: text(2..16)
+	password: password(6..64)
+   
+space<User>
+    "nicolas" 	"a1*a1*a1*"
+	"anne"		"a1*a1*a1*"
 
 struct Subject
     #id: text(16)

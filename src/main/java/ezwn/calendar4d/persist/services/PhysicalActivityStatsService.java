@@ -2,6 +2,7 @@ package ezwn.calendar4d.persist.services;
 
 import ezwn.calendar4d.persist.repositories.PhysicalActivityStatsRepository;
 import ezwn.calendar4d.persist.schema.PhysicalActivityStats;
+import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,8 +14,8 @@ public class PhysicalActivityStatsService {
       this.physicalActivityStatsRepository = physicalActivityStatsRepository;
    }
    
-   public void save(final PhysicalActivityStats physicalActivityStats) {
-      physicalActivityStatsRepository.save(physicalActivityStats);
+   public PhysicalActivityStats save(PhysicalActivityStats physicalActivityStats) {
+      return physicalActivityStatsRepository.save(physicalActivityStats);
    }
    
    public void saveAll(final Iterable<PhysicalActivityStats> physicalActivityStatsIterable) {
@@ -23,6 +24,14 @@ public class PhysicalActivityStatsService {
    
    public Iterable<PhysicalActivityStats> findAll() {
       return physicalActivityStatsRepository.findAll();
+   }
+   
+   public Optional<PhysicalActivityStats> findById(String id) {
+      return physicalActivityStatsRepository.findById(id);
+   }
+   
+   public void delete(final PhysicalActivityStats physicalActivityStats) {
+      physicalActivityStatsRepository.delete(physicalActivityStats);
    }
    
 }

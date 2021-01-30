@@ -4,12 +4,15 @@ import ezwn.calendar4d.persist.dto.PhysicalActivityDTO;
 import ezwn.calendar4d.persist.mappers.EntitiesDTOsMapper;
 import ezwn.calendar4d.persist.services.PhysicalActivityService;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,6 +46,18 @@ public class PhysicalActivityRestController {
    @GetMapping("")
    public Iterable<PhysicalActivityDTO> findAll() {
       return StreamSupport.stream(physicalActivityService.findAll().spliterator(), false).map(EntitiesDTOsMapper::toDTO).collect(Collectors.toList());
+   }
+   
+   @CrossOrigin
+   @GetMapping("/{id}")
+   public Optional<PhysicalActivityDTO> findById(@PathVariable String id) {
+      return physicalActivityService.findById(id).map(EntitiesDTOsMapper::toDTO);
+   }
+   
+   @CrossOrigin
+   @DeleteMapping
+   public void delete(@RequestBody final PhysicalActivityDTO physicalActivityDTO) {
+      physicalActivityService.delete(EntitiesDTOsMapper.toEntity(physicalActivityDTO));
    }
    
 }
