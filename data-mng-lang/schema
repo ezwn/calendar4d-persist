@@ -1,5 +1,13 @@
 
-# 08/12/2020 08:15:00
+# 30/01/2021 16:20:00
+
+struct CalendarUser
+    #userName: text(2..16)
+	password: password(6..64)
+   
+space<CalendarUser>
+    "nicolas" 	"a1*a1*a1*"
+	"anne"		"a1*a1*a1*"
 
 struct Subject
     #id: text(16)
@@ -94,6 +102,9 @@ struct Entry
 	
 repo<Entry>
 	findAllByModificationTimeAfter(time)
+	
+repo<CalendarUser>
+	findByUserName(userName)
 	
 struct PhysicalActivityStats
     #date: text(16)

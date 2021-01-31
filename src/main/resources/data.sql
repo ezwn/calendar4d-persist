@@ -49,6 +49,9 @@ INSERT INTO c4d_physical_activity (id, energy) VALUES ('BIKING_20', 600)^;
 
 INSERT INTO c4d_subject (id, name) VALUES ('ME', 'Moi')^;
 
+INSERT INTO c4d_calendar_user (user_name, password) VALUES ('nicolas', 'a1*a1*a1*')^;
+INSERT INTO c4d_calendar_user (user_name, password) VALUES ('anne', 'a1*a1*a1*')^;
+
 INSERT INTO c4d_entry_type_category (id, name, duration, position) VALUES ('NOTE', 'Note', 'ENABLED', 'ENABLED')^;
 INSERT INTO c4d_entry_type_category (id, name, duration, position) VALUES ('PHYSICAL_ACTIVITY', 'Activité physique', 'REQUIRED', 'ENABLED')^;
 INSERT INTO c4d_entry_type_category (id, name, duration, position) VALUES ('INTELLECTUAL_ACTIVITY', 'Activité intellectuelle', 'REQUIRED', 'ENABLED')^;

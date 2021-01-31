@@ -1,15 +1,31 @@
 package ezwn.calendar4d.persist.mappers;
 
+import ezwn.calendar4d.persist.dto.CalendarUserDTO;
 import ezwn.calendar4d.persist.dto.EntryDTO;
 import ezwn.calendar4d.persist.dto.EntryTypeDTO;
 import ezwn.calendar4d.persist.dto.PhysicalActivityDTO;
 import ezwn.calendar4d.persist.dto.PhysicalActivityStatsDTO;
+import ezwn.calendar4d.persist.schema.CalendarUser;
 import ezwn.calendar4d.persist.schema.Entry;
 import ezwn.calendar4d.persist.schema.EntryType;
 import ezwn.calendar4d.persist.schema.PhysicalActivity;
 import ezwn.calendar4d.persist.schema.PhysicalActivityStats;
 
 public class EntitiesDTOsMapper {
+   
+   public static CalendarUser toEntity(final CalendarUserDTO calendarUserDTO) {
+      final var calendarUser = new CalendarUser();
+      calendarUser.setUserName(calendarUserDTO.getUserName());
+      calendarUser.setPassword(calendarUserDTO.getPassword());
+      return calendarUser;
+   }
+   
+   public static CalendarUserDTO toDTO(final CalendarUser calendarUser) {
+      final var calendarUserDTO = new CalendarUserDTO();
+      calendarUserDTO.setUserName(calendarUser.getUserName());
+      calendarUserDTO.setPassword(calendarUser.getPassword());
+      return calendarUserDTO;
+   }
    
    public static PhysicalActivity toEntity(final PhysicalActivityDTO physicalActivityDTO) {
       final var physicalActivity = new PhysicalActivity();

@@ -2,6 +2,7 @@ package ezwn.calendar4d.persist.services;
 
 import ezwn.calendar4d.persist.repositories.EntryRepository;
 import ezwn.calendar4d.persist.schema.Entry;
+import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,8 +14,8 @@ public class EntryService {
       this.entryRepository = entryRepository;
    }
    
-   public void save(final Entry entry) {
-      entryRepository.save(entry);
+   public Entry save(Entry entry) {
+      return entryRepository.save(entry);
    }
    
    public void saveAll(final Iterable<Entry> entryIterable) {
@@ -23,6 +24,14 @@ public class EntryService {
    
    public Iterable<Entry> findAll() {
       return entryRepository.findAll();
+   }
+   
+   public Optional<Entry> findById(String id) {
+      return entryRepository.findById(id);
+   }
+   
+   public void delete(final Entry entry) {
+      entryRepository.delete(entry);
    }
    
    public Iterable<Entry> findAllByModificationTimeAfter(java.time.LocalDateTime param0) {
