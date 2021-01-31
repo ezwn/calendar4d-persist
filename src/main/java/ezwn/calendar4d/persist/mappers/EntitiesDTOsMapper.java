@@ -1,30 +1,30 @@
 package ezwn.calendar4d.persist.mappers;
 
+import ezwn.calendar4d.persist.dto.CalendarUserDTO;
 import ezwn.calendar4d.persist.dto.EntryDTO;
 import ezwn.calendar4d.persist.dto.EntryTypeDTO;
 import ezwn.calendar4d.persist.dto.PhysicalActivityDTO;
 import ezwn.calendar4d.persist.dto.PhysicalActivityStatsDTO;
-import ezwn.calendar4d.persist.dto.UserDTO;
+import ezwn.calendar4d.persist.schema.CalendarUser;
 import ezwn.calendar4d.persist.schema.Entry;
 import ezwn.calendar4d.persist.schema.EntryType;
 import ezwn.calendar4d.persist.schema.PhysicalActivity;
 import ezwn.calendar4d.persist.schema.PhysicalActivityStats;
-import ezwn.calendar4d.persist.schema.User;
 
 public class EntitiesDTOsMapper {
    
-   public static User toEntity(final UserDTO userDTO) {
-      final var user = new User();
-      user.setUserName(userDTO.getUserName());
-      user.setPassword(userDTO.getPassword());
-      return user;
+   public static CalendarUser toEntity(final CalendarUserDTO calendarUserDTO) {
+      final var calendarUser = new CalendarUser();
+      calendarUser.setUserName(calendarUserDTO.getUserName());
+      calendarUser.setPassword(calendarUserDTO.getPassword());
+      return calendarUser;
    }
    
-   public static UserDTO toDTO(final User user) {
-      final var userDTO = new UserDTO();
-      userDTO.setUserName(user.getUserName());
-      userDTO.setPassword(user.getPassword());
-      return userDTO;
+   public static CalendarUserDTO toDTO(final CalendarUser calendarUser) {
+      final var calendarUserDTO = new CalendarUserDTO();
+      calendarUserDTO.setUserName(calendarUser.getUserName());
+      calendarUserDTO.setPassword(calendarUser.getPassword());
+      return calendarUserDTO;
    }
    
    public static PhysicalActivity toEntity(final PhysicalActivityDTO physicalActivityDTO) {

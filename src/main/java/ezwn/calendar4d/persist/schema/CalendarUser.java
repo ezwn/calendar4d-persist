@@ -16,9 +16,9 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "user")
+@Table(name = "calendar_user")
 @Valid
-public class User implements Serializable {
+public class CalendarUser implements Serializable {
    
    private static final long serialVersionUID = 1L;
 

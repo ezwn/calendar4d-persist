@@ -14,7 +14,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Valid
-public class UserDTO implements Serializable {
+public class CalendarUserDTO implements Serializable {
 
    private static final long serialVersionUID = 1L;
 
