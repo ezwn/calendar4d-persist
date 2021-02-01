@@ -16,9 +16,9 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "entry_type_category")
+@Table(name = "entry_type_class")
 @Valid
-public class EntryTypeCategory implements Serializable {
+public class EntryTypeClass implements Serializable {
    
    private static final long serialVersionUID = 1L;
 

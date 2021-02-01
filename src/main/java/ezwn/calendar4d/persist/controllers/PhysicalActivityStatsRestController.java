@@ -23,41 +23,43 @@ import org.springframework.web.bind.annotation.RestController;
 public class PhysicalActivityStatsRestController {
    
    private PhysicalActivityStatsService physicalActivityStatsService;
+   private EntitiesDTOsMapper entitiesDTOsMapper;
    
-   public PhysicalActivityStatsRestController(final PhysicalActivityStatsService physicalActivityStatsService) {
+   public PhysicalActivityStatsRestController(final EntitiesDTOsMapper entitiesDTOsMapper, final PhysicalActivityStatsService physicalActivityStatsService) {
       this.physicalActivityStatsService = physicalActivityStatsService;
+      this.entitiesDTOsMapper = entitiesDTOsMapper;
    }
    
    @CrossOrigin
    @PostMapping
    @PatchMapping
    public void save(@RequestBody final PhysicalActivityStatsDTO physicalActivityStatsDTO) {
-      physicalActivityStatsService.save(EntitiesDTOsMapper.toEntity(physicalActivityStatsDTO));
+      physicalActivityStatsService.save(entitiesDTOsMapper.toEntity(physicalActivityStatsDTO));
    }
    
    @CrossOrigin
    @PostMapping("/all")
    @PatchMapping("/all")
    public void saveAll(@RequestBody final List<PhysicalActivityStatsDTO> physicalActivityStatsDTOList) {
-      physicalActivityStatsService.saveAll(physicalActivityStatsDTOList.stream().map(EntitiesDTOsMapper::toEntity).collect(Collectors.toList()));
+      physicalActivityStatsService.saveAll(physicalActivityStatsDTOList.stream().map(i -> entitiesDTOsMapper.toEntity(i)).collect(Collectors.toList()));
    }
    
    @CrossOrigin
    @GetMapping("")
    public Iterable<PhysicalActivityStatsDTO> findAll() {
-      return StreamSupport.stream(physicalActivityStatsService.findAll().spliterator(), false).map(EntitiesDTOsMapper::toDTO).collect(Collectors.toList());
+      return StreamSupport.stream(physicalActivityStatsService.findAll().spliterator(), false).map(i -> entitiesDTOsMapper.toDTO(i)).collect(Collectors.toList());
    }
    
    @CrossOrigin
    @GetMapping("/{id}")
    public Optional<PhysicalActivityStatsDTO> findById(@PathVariable String id) {
-      return physicalActivityStatsService.findById(id).map(EntitiesDTOsMapper::toDTO);
+      return physicalActivityStatsService.findById(id).map(i -> entitiesDTOsMapper.toDTO(i));
    }
    
    @CrossOrigin
    @DeleteMapping
    public void delete(@RequestBody final PhysicalActivityStatsDTO physicalActivityStatsDTO) {
-      physicalActivityStatsService.delete(EntitiesDTOsMapper.toEntity(physicalActivityStatsDTO));
+      physicalActivityStatsService.delete(entitiesDTOsMapper.toEntity(physicalActivityStatsDTO));
    }
    
 }

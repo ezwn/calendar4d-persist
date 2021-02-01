@@ -23,9 +23,13 @@ public class EntryTypeDTO implements Serializable {
    String id;
    
    @NotNull
-   String category;
+   String calendarUser;
    
    @NotNull
+   String entryTypeClass;
+   
+   @NotNull
+   @Size(max=64)
    String name;
    
    String physicalActivity;

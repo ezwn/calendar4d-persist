@@ -23,41 +23,43 @@ import org.springframework.web.bind.annotation.RestController;
 public class EntryTypeRestController {
    
    private EntryTypeService entryTypeService;
+   private EntitiesDTOsMapper entitiesDTOsMapper;
    
-   public EntryTypeRestController(final EntryTypeService entryTypeService) {
+   public EntryTypeRestController(final EntitiesDTOsMapper entitiesDTOsMapper, final EntryTypeService entryTypeService) {
       this.entryTypeService = entryTypeService;
+      this.entitiesDTOsMapper = entitiesDTOsMapper;
    }
    
    @CrossOrigin
    @PostMapping
    @PatchMapping
    public void save(@RequestBody final EntryTypeDTO entryTypeDTO) {
-      entryTypeService.save(EntitiesDTOsMapper.toEntity(entryTypeDTO));
+      entryTypeService.save(entitiesDTOsMapper.toEntity(entryTypeDTO));
    }
    
    @CrossOrigin
    @PostMapping("/all")
    @PatchMapping("/all")
    public void saveAll(@RequestBody final List<EntryTypeDTO> entryTypeDTOList) {
-      entryTypeService.saveAll(entryTypeDTOList.stream().map(EntitiesDTOsMapper::toEntity).collect(Collectors.toList()));
+      entryTypeService.saveAll(entryTypeDTOList.stream().map(i -> entitiesDTOsMapper.toEntity(i)).collect(Collectors.toList()));
    }
    
    @CrossOrigin
    @GetMapping("")
    public Iterable<EntryTypeDTO> findAll() {
-      return StreamSupport.stream(entryTypeService.findAll().spliterator(), false).map(EntitiesDTOsMapper::toDTO).collect(Collectors.toList());
+      return StreamSupport.stream(entryTypeService.findAll().spliterator(), false).map(i -> entitiesDTOsMapper.toDTO(i)).collect(Collectors.toList());
    }
    
    @CrossOrigin
    @GetMapping("/{id}")
    public Optional<EntryTypeDTO> findById(@PathVariable String id) {
-      return entryTypeService.findById(id).map(EntitiesDTOsMapper::toDTO);
+      return entryTypeService.findById(id).map(i -> entitiesDTOsMapper.toDTO(i));
    }
    
    @CrossOrigin
    @DeleteMapping
    public void delete(@RequestBody final EntryTypeDTO entryTypeDTO) {
-      entryTypeService.delete(EntitiesDTOsMapper.toEntity(entryTypeDTO));
+      entryTypeService.delete(entitiesDTOsMapper.toEntity(entryTypeDTO));
    }
    
 }

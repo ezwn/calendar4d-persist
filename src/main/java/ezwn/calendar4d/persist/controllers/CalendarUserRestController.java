@@ -24,41 +24,43 @@ import org.springframework.web.bind.annotation.RestController;
 public class CalendarUserRestController {
    
    private CalendarUserService calendarUserService;
+   private EntitiesDTOsMapper entitiesDTOsMapper;
    
-   public CalendarUserRestController(final CalendarUserService calendarUserService) {
+   public CalendarUserRestController(final EntitiesDTOsMapper entitiesDTOsMapper, final CalendarUserService calendarUserService) {
       this.calendarUserService = calendarUserService;
+      this.entitiesDTOsMapper = entitiesDTOsMapper;
    }
    
    @CrossOrigin
    @PostMapping
    @PatchMapping
    public void save(@RequestBody final CalendarUserDTO calendarUserDTO) {
-      calendarUserService.save(EntitiesDTOsMapper.toEntity(calendarUserDTO));
+      calendarUserService.save(entitiesDTOsMapper.toEntity(calendarUserDTO));
    }
    
    @CrossOrigin
    @PostMapping("/all")
    @PatchMapping("/all")
    public void saveAll(@RequestBody final List<CalendarUserDTO> calendarUserDTOList) {
-      calendarUserService.saveAll(calendarUserDTOList.stream().map(EntitiesDTOsMapper::toEntity).collect(Collectors.toList()));
+      calendarUserService.saveAll(calendarUserDTOList.stream().map(i -> entitiesDTOsMapper.toEntity(i)).collect(Collectors.toList()));
    }
    
    @CrossOrigin
    @GetMapping("")
    public Iterable<CalendarUserDTO> findAll() {
-      return StreamSupport.stream(calendarUserService.findAll().spliterator(), false).map(EntitiesDTOsMapper::toDTO).collect(Collectors.toList());
+      return StreamSupport.stream(calendarUserService.findAll().spliterator(), false).map(i -> entitiesDTOsMapper.toDTO(i)).collect(Collectors.toList());
    }
    
    @CrossOrigin
    @GetMapping("/{id}")
    public Optional<CalendarUserDTO> findById(@PathVariable String id) {
-      return calendarUserService.findById(id).map(EntitiesDTOsMapper::toDTO);
+      return calendarUserService.findById(id).map(i -> entitiesDTOsMapper.toDTO(i));
    }
    
    @CrossOrigin
    @DeleteMapping
    public void delete(@RequestBody final CalendarUserDTO calendarUserDTO) {
-      calendarUserService.delete(EntitiesDTOsMapper.toEntity(calendarUserDTO));
+      calendarUserService.delete(entitiesDTOsMapper.toEntity(calendarUserDTO));
    }
    
    @CrossOrigin
@@ -66,7 +68,7 @@ public class CalendarUserRestController {
    public CalendarUserDTO findByUserName(
       @RequestParam String param0
    ) {
-      return EntitiesDTOsMapper.toDTO(calendarUserService.findByUserName(param0));
+      return entitiesDTOsMapper.toDTO(calendarUserService.findByUserName(param0));
    }
    
 }

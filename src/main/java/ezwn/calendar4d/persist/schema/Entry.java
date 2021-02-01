@@ -33,9 +33,9 @@ public class Entry implements Serializable {
    @NotNull
    String type;
    
-   @Column(name = "subject")
+   @Column(name = "topic")
    @NotNull
-   String subject;
+   String topic;
    
    @Column(name = "time")
    @NotNull

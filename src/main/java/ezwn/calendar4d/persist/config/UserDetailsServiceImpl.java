@@ -13,16 +13,16 @@ import ezwn.calendar4d.persist.schema.CalendarUser;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
- 
+
 	public static class User implements UserDetails {
 
 		private static final long serialVersionUID = 1L;
-		
+
 		private CalendarUser calendarUser;
-	 
-	    public User(CalendarUser gourmet) {
-	        this.calendarUser = gourmet;
-	    }
+
+		public User(CalendarUser gourmet) {
+			this.calendarUser = gourmet;
+		}
 
 		@Override
 		public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -31,7 +31,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 		@Override
 		public String getPassword() {
-			return "{noop}" + calendarUser.getPassword();
+			return calendarUser.getPassword();
 		}
 
 		@Override
@@ -67,14 +67,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 			this.calendarUser = calendarUser;
 		}
 	}
-	
-    @Autowired
-    private CalendarUserRepository calendarUserRepository;
- 
-    @Override
-    public UserDetails loadUserByUsername(String username) {
-    	CalendarUser calendarUser = calendarUserRepository.findByUserName(username);
-        return new User(calendarUser);
-    }
+
+	@Autowired
+	private CalendarUserRepository calendarUserRepository;
+
+	@Override
+	public UserDetails loadUserByUsername(String username) {
+		CalendarUser calendarUser = calendarUserRepository.findByUserName(username);
+		return new User(calendarUser);
+	}
 
 }

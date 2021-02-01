@@ -28,12 +28,17 @@ public class EntryType implements Serializable {
    @Size(max=16)
    String id;
    
-   @Column(name = "category")
+   @Column(name = "calendar_user")
    @NotNull
-   String category;
+   String calendarUser;
+   
+   @Column(name = "entry_type_class")
+   @NotNull
+   String entryTypeClass;
    
    @Column(name = "name")
    @NotNull
+   @Size(max=64)
    String name;
    
    @Column(name = "physical_activity")

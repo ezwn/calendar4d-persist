@@ -2,7 +2,6 @@ package ezwn.calendar4d.persist.dto;
 
 import java.io.Serializable;
 import javax.validation.Valid;
-import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -15,7 +14,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Valid
-public class EntryDTO implements Serializable {
+public class TopicDTO implements Serializable {
 
    private static final long serialVersionUID = 1L;
 
@@ -24,27 +23,11 @@ public class EntryDTO implements Serializable {
    String id;
    
    @NotNull
-   String type;
+   String calendarUser;
    
    @NotNull
-   String topic;
-   
-   @NotNull
-   java.time.LocalDateTime time;
-   
-   Integer duration;
-   
-   @Digits(integer=3, fraction=9)
-   Double latitude;
-   
-   @Digits(integer=2, fraction=9)
-   Double longitude;
-   
-   String comment;
-   
-   java.time.LocalDateTime modificationTime;
-   
-   Boolean deleted;
+   @Size(max=64)
+   String name;
    
 
 }

@@ -20,25 +20,27 @@ import ezwn.calendar4d.persist.repositories.CalendarUserRepository;
 public class LoginRestController {
 
 	private final CalendarUserRepository calendarUserRepository;
+	private final EntitiesDTOsMapper entitiesDTOsMapper;
 	
-   public LoginRestController(final CalendarUserRepository calendarUserRepository) {
-	      this.calendarUserRepository =calendarUserRepository;
+   public LoginRestController(final EntitiesDTOsMapper entitiesDTOsMapper, final CalendarUserRepository calendarUserRepository) {
+	      this.calendarUserRepository = calendarUserRepository;
+	      this.entitiesDTOsMapper = entitiesDTOsMapper;
 	   }
    
    @CrossOrigin	
    @GetMapping("")
    public CalendarUserDTO login(Principal principal) {
 		if (principal instanceof User) {
-			return EntitiesDTOsMapper.toDTO(((User)principal).getCalendarUser());
+			return entitiesDTOsMapper.toDTO(((User)principal).getCalendarUser());
 		} else {
-			return EntitiesDTOsMapper.toDTO(calendarUserRepository.findByUserName(principal.getName()));
+			return entitiesDTOsMapper.toDTO(calendarUserRepository.findByUserName(principal.getName()));
 		}
    }
 
    @CrossOrigin	
    @PostMapping("")
    public void register(@RequestBody final CalendarUserDTO calendarUserDTO) {
-	   calendarUserRepository.save(EntitiesDTOsMapper.toEntity(calendarUserDTO));
+	   calendarUserRepository.save(entitiesDTOsMapper.toEntity(calendarUserDTO));
    }
    
 }

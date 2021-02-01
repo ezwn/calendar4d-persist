@@ -25,41 +25,43 @@ import org.springframework.web.bind.annotation.RestController;
 public class EntryRestController {
    
    private EntryService entryService;
+   private EntitiesDTOsMapper entitiesDTOsMapper;
    
-   public EntryRestController(final EntryService entryService) {
+   public EntryRestController(final EntitiesDTOsMapper entitiesDTOsMapper, final EntryService entryService) {
       this.entryService = entryService;
+      this.entitiesDTOsMapper = entitiesDTOsMapper;
    }
    
    @CrossOrigin
    @PostMapping
    @PatchMapping
    public void save(@RequestBody final EntryDTO entryDTO) {
-      entryService.save(EntitiesDTOsMapper.toEntity(entryDTO));
+      entryService.save(entitiesDTOsMapper.toEntity(entryDTO));
    }
    
    @CrossOrigin
    @PostMapping("/all")
    @PatchMapping("/all")
    public void saveAll(@RequestBody final List<EntryDTO> entryDTOList) {
-      entryService.saveAll(entryDTOList.stream().map(EntitiesDTOsMapper::toEntity).collect(Collectors.toList()));
+      entryService.saveAll(entryDTOList.stream().map(i -> entitiesDTOsMapper.toEntity(i)).collect(Collectors.toList()));
    }
    
    @CrossOrigin
    @GetMapping("")
    public Iterable<EntryDTO> findAll() {
-      return StreamSupport.stream(entryService.findAll().spliterator(), false).map(EntitiesDTOsMapper::toDTO).collect(Collectors.toList());
+      return StreamSupport.stream(entryService.findAll().spliterator(), false).map(i -> entitiesDTOsMapper.toDTO(i)).collect(Collectors.toList());
    }
    
    @CrossOrigin
    @GetMapping("/{id}")
    public Optional<EntryDTO> findById(@PathVariable String id) {
-      return entryService.findById(id).map(EntitiesDTOsMapper::toDTO);
+      return entryService.findById(id).map(i -> entitiesDTOsMapper.toDTO(i));
    }
    
    @CrossOrigin
    @DeleteMapping
    public void delete(@RequestBody final EntryDTO entryDTO) {
-      entryService.delete(EntitiesDTOsMapper.toEntity(entryDTO));
+      entryService.delete(entitiesDTOsMapper.toEntity(entryDTO));
    }
    
    @CrossOrigin
@@ -67,7 +69,7 @@ public class EntryRestController {
    public Iterable<EntryDTO> findAllByModificationTimeAfter(
       @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) java.time.LocalDateTime param0
    ) {
-      return StreamSupport.stream(entryService.findAllByModificationTimeAfter(param0).spliterator(), false).map(EntitiesDTOsMapper::toDTO).collect(Collectors.toList());
+      return StreamSupport.stream(entryService.findAllByModificationTimeAfter(param0).spliterator(), false).map(i -> entitiesDTOsMapper.toDTO(i)).collect(Collectors.toList());
    }
    
 }
