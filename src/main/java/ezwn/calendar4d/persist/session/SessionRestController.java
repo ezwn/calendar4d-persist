@@ -1,4 +1,4 @@
-package ezwn.calendar4d.persist.controllers;
+package ezwn.calendar4d.persist.session;
 
 import java.security.Principal;
 
@@ -17,12 +17,12 @@ import ezwn.calendar4d.persist.repositories.CalendarUserRepository;
 
 @RestController
 @RequestMapping(value="/login", produces = MediaType.APPLICATION_JSON_VALUE)
-public class LoginRestController {
+public class SessionRestController {
 
 	private final CalendarUserRepository calendarUserRepository;
 	private final EntitiesDTOsMapper entitiesDTOsMapper;
 	
-   public LoginRestController(final EntitiesDTOsMapper entitiesDTOsMapper, final CalendarUserRepository calendarUserRepository) {
+   public SessionRestController(final EntitiesDTOsMapper entitiesDTOsMapper, final CalendarUserRepository calendarUserRepository) {
 	      this.calendarUserRepository = calendarUserRepository;
 	      this.entitiesDTOsMapper = entitiesDTOsMapper;
 	   }

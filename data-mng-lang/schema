@@ -1,7 +1,7 @@
 
 # 01/02/2021 19:45:00
 
-struct CalendarUser
+struct CalendarUser {CRUD|CRUD|CRUD}
     #userName: text(2..16)
 	password: password(6..128)
    
@@ -11,7 +11,7 @@ space<CalendarUser>
 	"anne"		"$2y$12$K3tLc8T8t1v5T4Jusij76.iVp92vT2owjef4komhSfioiw7iYI8ei"
 	"demo"		"$2y$12$K3tLc8T8t1v5T4Jusij76.iVp92vT2owjef4komhSfioiw7iYI8ei"
 
-struct Topic
+struct Topic {CRUD||CRUD}
     #id: text(16)
 	calendarUser: CalendarUser
     name: text(1..64)
@@ -21,7 +21,7 @@ space<Topic>
     "NICOLAS_CLIENTS"	    "nicolas"	"Work time by client"
     "ANNE_CLIENTS"	    	"anne"		"Work time by client"
 
-struct PhysicalActivity
+struct PhysicalActivity {|R|CRUD}
     #id: text(16)
     energy: int
 
@@ -58,9 +58,9 @@ finite space<EntryTypeClass>
     "SYMPTOM"   			"Symptom"					"ENABLED"	"DISABLED"
     "RESOURCE"				"Resource"					"DISABLED"	"REQUIRED"
 
-struct EntryType
+struct EntryType {CRUD||CRUD}
     #id: text(16)
-	calendarUser: CalendarUser
+	@calendarUser: CalendarUser
 	entryTypeClass: EntryTypeClass
     name: text(1..64)
 	physicalActivity: PhysicalActivity[0..1]
@@ -95,8 +95,9 @@ space<EntryType>
     "RHINITIS"				"nicolas"	"SYMPTOM"					"Rhinite"				null
     "BACK_PAIN"      		"nicolas"	"SYMPTOM"					"Mal au dos"			null
 
-struct Entry
+struct Entry {CRUD||CRUD}
     #id: text(16)
+	@calendarUser: CalendarUser
     type: EntryType
 	topic: Topic
     time: datetime
@@ -104,16 +105,16 @@ struct Entry
 	latitude: decimal(3,9)[0..1]
 	longitude: decimal(2,9)[0..1]
 	comment: text[0..1]
-    @modificationTime: datetime[0..1]
+    *modificationTime: datetime[0..1]
 	-deleted: bool[0..1]
 	
 repo<Entry>
-	findAllByModificationTimeAfter(time)
+	findAllByModificationTimeAfter()
 	
 repo<CalendarUser>
-	findByUserName(userName)
+	findByUserName()
 	
-struct PhysicalActivityStats
+struct PhysicalActivityStats  {R||R}
     #date: text(16)
     duration: int
 	energy: int

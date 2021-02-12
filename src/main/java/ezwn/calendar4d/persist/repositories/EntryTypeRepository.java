@@ -5,4 +5,6 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface EntryTypeRepository extends CrudRepository<EntryType, String> {
 
+   Iterable<EntryType> findAllByCalendarUser(String param0);
+
 }

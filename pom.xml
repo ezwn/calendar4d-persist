@@ -70,7 +70,7 @@
 			<plugin>
 				<groupId>ezwn</groupId>
 				<artifactId>data-mng-lang-core-maven-plugin</artifactId>
-				<version>0.3.1-SNAPSHOT</version>
+				<version>1.0.1-SNAPSHOT</version>
 				<executions>
 					<execution>
 						<id>GenerateHealthPersistSources</id>
@@ -81,6 +81,8 @@
 							<goal>GenerateServices</goal>
 							<goal>GenerateDTOs</goal>
 							<goal>GenerateRestControllers</goal>
+							<goal>GenerateRestMineControllers</goal>
+							<goal>GenerateRestAdminControllers</goal>
 							<goal>GenerateEntitiesDTOsMapper</goal>
 							<goal>GenerateSQLData</goal>
 						</goals>

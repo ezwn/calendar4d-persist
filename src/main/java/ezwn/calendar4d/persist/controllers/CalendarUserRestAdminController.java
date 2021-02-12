@@ -8,6 +8,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,14 +20,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+@PreAuthorize("hasRole('ROLE_ADMIN')")
 @RestController
-@RequestMapping(value="/calendar-user", produces = MediaType.APPLICATION_JSON_VALUE)
-public class CalendarUserRestController {
+@RequestMapping(value="/calendar-user/admin", produces = MediaType.APPLICATION_JSON_VALUE)
+public class CalendarUserRestAdminController {
    
    private CalendarUserService calendarUserService;
    private EntitiesDTOsMapper entitiesDTOsMapper;
    
-   public CalendarUserRestController(final EntitiesDTOsMapper entitiesDTOsMapper, final CalendarUserService calendarUserService) {
+   public CalendarUserRestAdminController(final EntitiesDTOsMapper entitiesDTOsMapper, final CalendarUserService calendarUserService) {
       this.calendarUserService = calendarUserService;
       this.entitiesDTOsMapper = entitiesDTOsMapper;
    }

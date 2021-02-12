@@ -91,6 +91,7 @@ public class EntitiesDTOsMapper {
    public Entry toEntity(final EntryDTO entryDTO) {
       final var entry = new Entry();
       entry.setId(entryDTO.getId());
+      entry.setCalendarUser(entryDTO.getCalendarUser());
       entry.setType(entryDTO.getType());
       entry.setTopic(entryDTO.getTopic());
       entry.setTime(entryDTO.getTime());
@@ -106,6 +107,7 @@ public class EntitiesDTOsMapper {
    public EntryDTO toDTO(final Entry entry) {
       final var entryDTO = new EntryDTO();
       entryDTO.setId(entry.getId());
+      entryDTO.setCalendarUser(entry.getCalendarUser());
       entryDTO.setType(entry.getType());
       entryDTO.setTopic(entry.getTopic());
       entryDTO.setTime(entry.getTime());

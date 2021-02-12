@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,14 +21,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+@PreAuthorize("hasRole('ROLE_ADMIN')")
 @RestController
-@RequestMapping(value="/entry", produces = MediaType.APPLICATION_JSON_VALUE)
-public class EntryRestController {
+@RequestMapping(value="/entry/admin", produces = MediaType.APPLICATION_JSON_VALUE)
+public class EntryRestAdminController {
    
    private EntryService entryService;
    private EntitiesDTOsMapper entitiesDTOsMapper;
    
-   public EntryRestController(final EntitiesDTOsMapper entitiesDTOsMapper, final EntryService entryService) {
+   public EntryRestAdminController(final EntitiesDTOsMapper entitiesDTOsMapper, final EntryService entryService) {
       this.entryService = entryService;
       this.entitiesDTOsMapper = entitiesDTOsMapper;
    }
@@ -66,9 +68,7 @@ public class EntryRestController {
    
    @CrossOrigin
    @GetMapping("/find-all-by-modification-time-after")
-   public Iterable<EntryDTO> findAllByModificationTimeAfter(
-      @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) java.time.LocalDateTime param0
-   ) {
+   public Iterable<EntryDTO> findAllByModificationTimeAfter(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) java.time.LocalDateTime param0) {
       return StreamSupport.stream(entryService.findAllByModificationTimeAfter(param0).spliterator(), false).map(i -> entitiesDTOsMapper.toDTO(i)).collect(Collectors.toList());
    }
    
