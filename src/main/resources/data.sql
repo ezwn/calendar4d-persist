@@ -8,7 +8,10 @@ CREATE VIEW c4d_physical_activity_stats AS
 	    GROUP BY DATE(time)
 	    ORDER BY date DESC^;
 
-INSERT INTO c4d_entry_type (id, calendar_user, entry_type_class, name, physical_activity) VALUES ('NOTE', 'nicolas', 'NOTE', 'Note', NULL)^;
+INSERT INTO c4d_role (id) VALUES ('ADMIN')^;
+INSERT INTO c4d_role (id) VALUES ('USER')^;
+
+INSERT INTO c4d_entry_type (id, calendar_user, entry_type_class, name, physical_activity) VALUES ('NOTE', 'n', 'NOTE', 'Note', NULL)^;
 INSERT INTO c4d_entry_type (id, calendar_user, entry_type_class, name, physical_activity) VALUES ('RESOURCE', 'nicolas', 'RESOURCE', 'Ressource', NULL)^;
 INSERT INTO c4d_entry_type (id, calendar_user, entry_type_class, name, physical_activity) VALUES ('WALKING_SLOW', 'nicolas', 'PHYSICAL_ACTIVITY', 'Marche lente', 'WALKING_SLOW')^;
 INSERT INTO c4d_entry_type (id, calendar_user, entry_type_class, name, physical_activity) VALUES ('WALKING_NORMAL', 'nicolas', 'PHYSICAL_ACTIVITY', 'Marche', 'WALKING_NORMAL')^;
@@ -45,6 +48,10 @@ INSERT INTO c4d_entry_type_class (id, name, duration, position) VALUES ('INTELLE
 INSERT INTO c4d_entry_type_class (id, name, duration, position) VALUES ('SYMPTOM', 'Symptom', 'ENABLED', 'DISABLED')^;
 INSERT INTO c4d_entry_type_class (id, name, duration, position) VALUES ('RESOURCE', 'Resource', 'DISABLED', 'REQUIRED')^;
 
+INSERT INTO c4d_user_role (id, user_id, role) VALUES ('n-ADMIN', 'n', 'ADMIN')^;
+INSERT INTO c4d_user_role (id, user_id, role) VALUES ('a-USER', 'a', 'USER')^;
+INSERT INTO c4d_user_role (id, user_id, role) VALUES ('d-USER', 'd', 'USER')^;
+
 INSERT INTO c4d_physical_activity (id, energy) VALUES ('WALKING_SLOW', 210)^;
 INSERT INTO c4d_physical_activity (id, energy) VALUES ('WALKING_NORMAL', 300)^;
 INSERT INTO c4d_physical_activity (id, energy) VALUES ('WALKING_FAST', 420)^;
@@ -58,6 +65,6 @@ INSERT INTO c4d_topic (id, calendar_user, name) VALUES ('NICOLAS_HEALTH', 'nicol
 INSERT INTO c4d_topic (id, calendar_user, name) VALUES ('NICOLAS_CLIENTS', 'nicolas', 'Work time by client')^;
 INSERT INTO c4d_topic (id, calendar_user, name) VALUES ('ANNE_CLIENTS', 'anne', 'Work time by client')^;
 
-INSERT INTO c4d_calendar_user (user_name, password) VALUES ('nicolas', '$2y$12$K3tLc8T8t1v5T4Jusij76.iVp92vT2owjef4komhSfioiw7iYI8ei')^;
-INSERT INTO c4d_calendar_user (user_name, password) VALUES ('anne', '$2y$12$K3tLc8T8t1v5T4Jusij76.iVp92vT2owjef4komhSfioiw7iYI8ei')^;
-INSERT INTO c4d_calendar_user (user_name, password) VALUES ('demo', '$2y$12$K3tLc8T8t1v5T4Jusij76.iVp92vT2owjef4komhSfioiw7iYI8ei')^;
+INSERT INTO c4d_calendar_user (user_name, password) VALUES ('n', '$2y$12$K3tLc8T8t1v5T4Jusij76.iVp92vT2owjef4komhSfioiw7iYI8ei')^;
+INSERT INTO c4d_calendar_user (user_name, password) VALUES ('a', '$2y$12$K3tLc8T8t1v5T4Jusij76.iVp92vT2owjef4komhSfioiw7iYI8ei')^;
+INSERT INTO c4d_calendar_user (user_name, password) VALUES ('d', '$2y$12$K3tLc8T8t1v5T4Jusij76.iVp92vT2owjef4komhSfioiw7iYI8ei')^;

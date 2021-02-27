@@ -1,14 +1,19 @@
 package ezwn.calendar4d.persist.config;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
-import ezwn.calendar4d.persist.repositories.CalendarUserRepository;
+import ezwn.calendar4d.persist.repositories.SystemCalendarUserRepository;
+import ezwn.calendar4d.persist.repositories.SystemUserRoleRepository;
 import ezwn.calendar4d.persist.schema.CalendarUser;
 
 @Service
@@ -19,14 +24,18 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		private static final long serialVersionUID = 1L;
 
 		private CalendarUser calendarUser;
+		private Collection<? extends GrantedAuthority> grantedAuthorities;
 
-		public User(CalendarUser gourmet) {
+		public User(CalendarUser gourmet, List<String> roles) {
 			this.calendarUser = gourmet;
+
+			grantedAuthorities = roles.stream().map(role -> new SimpleGrantedAuthority(role))
+					.collect(Collectors.toList());
 		}
 
 		@Override
 		public Collection<? extends GrantedAuthority> getAuthorities() {
-			return null;
+			return grantedAuthorities;
 		}
 
 		@Override
@@ -69,12 +78,19 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	}
 
 	@Autowired
-	private CalendarUserRepository calendarUserRepository;
+	private SystemCalendarUserRepository calendarUserRepository;
+
+	@Autowired
+	private SystemUserRoleRepository userRoleRepository;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) {
 		CalendarUser calendarUser = calendarUserRepository.findByUserName(username);
-		return new User(calendarUser);
+
+		List<String> roles = StreamSupport.stream(userRoleRepository.findAllByUserId(username).spliterator(), false)
+				.map(userRole -> userRole.getRole()).collect(Collectors.toList());
+
+		return new User(calendarUser, roles);
 	}
 
 }

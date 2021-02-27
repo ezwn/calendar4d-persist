@@ -6,12 +6,14 @@ import ezwn.calendar4d.persist.dto.EntryTypeDTO;
 import ezwn.calendar4d.persist.dto.PhysicalActivityDTO;
 import ezwn.calendar4d.persist.dto.PhysicalActivityStatsDTO;
 import ezwn.calendar4d.persist.dto.TopicDTO;
+import ezwn.calendar4d.persist.dto.UserRoleDTO;
 import ezwn.calendar4d.persist.schema.CalendarUser;
 import ezwn.calendar4d.persist.schema.Entry;
 import ezwn.calendar4d.persist.schema.EntryType;
 import ezwn.calendar4d.persist.schema.PhysicalActivity;
 import ezwn.calendar4d.persist.schema.PhysicalActivityStats;
 import ezwn.calendar4d.persist.schema.Topic;
+import ezwn.calendar4d.persist.schema.UserRole;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -36,6 +38,22 @@ public class EntitiesDTOsMapper {
       final var calendarUserDTO = new CalendarUserDTO();
       calendarUserDTO.setUserName(calendarUser.getUserName());
       return calendarUserDTO;
+   }
+   
+   public UserRole toEntity(final UserRoleDTO userRoleDTO) {
+      final var userRole = new UserRole();
+      userRole.setId(userRoleDTO.getId());
+      userRole.setUserId(userRoleDTO.getUserId());
+      userRole.setRole(userRoleDTO.getRole());
+      return userRole;
+   }
+   
+   public UserRoleDTO toDTO(final UserRole userRole) {
+      final var userRoleDTO = new UserRoleDTO();
+      userRoleDTO.setId(userRole.getId());
+      userRoleDTO.setUserId(userRole.getUserId());
+      userRoleDTO.setRole(userRole.getRole());
+      return userRoleDTO;
    }
    
    public Topic toEntity(final TopicDTO topicDTO) {

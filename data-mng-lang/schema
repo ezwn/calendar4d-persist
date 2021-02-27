@@ -1,17 +1,34 @@
 
 # 01/02/2021 19:45:00
 
-struct CalendarUser {CRUD|CRUD|CRUD}
+struct CalendarUser
     #userName: text(2..16)
 	password: password(6..128)
    
 # password: a1*a1*a1*
 space<CalendarUser>
-    "nicolas" 	"$2y$12$K3tLc8T8t1v5T4Jusij76.iVp92vT2owjef4komhSfioiw7iYI8ei"
-	"anne"		"$2y$12$K3tLc8T8t1v5T4Jusij76.iVp92vT2owjef4komhSfioiw7iYI8ei"
-	"demo"		"$2y$12$K3tLc8T8t1v5T4Jusij76.iVp92vT2owjef4komhSfioiw7iYI8ei"
+    "n" 	"$2y$12$K3tLc8T8t1v5T4Jusij76.iVp92vT2owjef4komhSfioiw7iYI8ei"
+	"a"		"$2y$12$K3tLc8T8t1v5T4Jusij76.iVp92vT2owjef4komhSfioiw7iYI8ei"
+	"d"		"$2y$12$K3tLc8T8t1v5T4Jusij76.iVp92vT2owjef4komhSfioiw7iYI8ei"
 
-struct Topic {CRUD||CRUD}
+struct Role
+    #id: text(4..8)
+
+finite space<Role>
+    "ADMIN"
+    "USER"
+
+struct UserRole
+    #id: text(16)
+	userId: CalendarUser
+    role: Role
+
+space<UserRole>
+    "n-ADMIN"	"n"		"ADMIN"
+	"a-USER"	"a"		"USER"
+	"d-USER"	"d"		"USER"
+
+struct Topic
     #id: text(16)
 	calendarUser: CalendarUser
     name: text(1..64)
@@ -21,7 +38,7 @@ space<Topic>
     "NICOLAS_CLIENTS"	    "nicolas"	"Work time by client"
     "ANNE_CLIENTS"	    	"anne"		"Work time by client"
 
-struct PhysicalActivity {|R|CRUD}
+struct PhysicalActivity
     #id: text(16)
     energy: int
 
@@ -58,7 +75,7 @@ finite space<EntryTypeClass>
     "SYMPTOM"   			"Symptom"					"ENABLED"	"DISABLED"
     "RESOURCE"				"Resource"					"DISABLED"	"REQUIRED"
 
-struct EntryType {CRUD||CRUD}
+struct EntryType
     #id: text(16)
 	@calendarUser: CalendarUser
 	entryTypeClass: EntryTypeClass
@@ -66,7 +83,7 @@ struct EntryType {CRUD||CRUD}
 	physicalActivity: PhysicalActivity[0..1]
 
 space<EntryType>
-    "NOTE"      			"nicolas"	"NOTE"						"Note"      			null
+    "NOTE"      			"n"	"NOTE"						"Note"      			null
     "RESOURCE"      		"nicolas"	"RESOURCE"					"Ressource"    			null
 
     "WALKING_SLOW"      	"nicolas"	"PHYSICAL_ACTIVITY"			"Marche lente"      	"WALKING_SLOW"
@@ -95,7 +112,7 @@ space<EntryType>
     "RHINITIS"				"nicolas"	"SYMPTOM"					"Rhinite"				null
     "BACK_PAIN"      		"nicolas"	"SYMPTOM"					"Mal au dos"			null
 
-struct Entry {CRUD||CRUD}
+struct Entry
     #id: text(16)
 	@calendarUser: CalendarUser
     type: EntryType
@@ -107,14 +124,28 @@ struct Entry {CRUD||CRUD}
 	comment: text[0..1]
     *modificationTime: datetime[0..1]
 	-deleted: bool[0..1]
+
+repo<Entry> for Admin
+	findAll()
+	save()
+	saveAll()
+	delete()
 	
-repo<Entry>
-	findAllByModificationTimeAfter()
+repo<Entry> for User
+	findAllMine()
+	findAllMineByModificationTimeAfter()
+	saveMine()
+	saveAllMine()
+	deleteMine()
 	
-repo<CalendarUser>
+repo<CalendarUser> for System
+	save()
 	findByUserName()
+
+repo<UserRole> for System
+	findAllByUserId()
 	
-struct PhysicalActivityStats  {R||R}
+struct PhysicalActivityStats
     #date: text(16)
     duration: int
 	energy: int
