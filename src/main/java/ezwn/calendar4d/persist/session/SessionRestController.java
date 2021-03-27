@@ -12,22 +12,22 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ezwn.calendar4d.persist.config.UserDetailsServiceImpl.User;
 import ezwn.calendar4d.persist.dto.CalendarUserDTO;
-import ezwn.calendar4d.persist.mappers.EntitiesDTOsMapper;
+import ezwn.calendar4d.persist.mappers.CalendarUserDTOMapper;
 import ezwn.calendar4d.persist.repositories.SystemCalendarUserRepository;
 
 @RestController
-@RequestMapping(value="/login", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value="/api/v1/login", produces = MediaType.APPLICATION_JSON_VALUE)
 public class SessionRestController {
 
 	private final SystemCalendarUserRepository calendarUserRepository;
-	private final EntitiesDTOsMapper entitiesDTOsMapper;
+	private final CalendarUserDTOMapper entitiesDTOsMapper;
 	
-   public SessionRestController(final EntitiesDTOsMapper entitiesDTOsMapper, final SystemCalendarUserRepository calendarUserRepository) {
+   public SessionRestController(final CalendarUserDTOMapper entitiesDTOsMapper, final SystemCalendarUserRepository calendarUserRepository) {
 	      this.calendarUserRepository = calendarUserRepository;
 	      this.entitiesDTOsMapper = entitiesDTOsMapper;
 	   }
    
-   @CrossOrigin	
+   @CrossOrigin
    @GetMapping("")
    public CalendarUserDTO login(Principal principal) {
 		if (principal instanceof User) {

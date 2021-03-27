@@ -64,6 +64,7 @@ INSERT INTO c4d_physical_activity (id, energy) VALUES ('BIKING_20', 600)^;
 INSERT INTO c4d_topic (id, calendar_user, name) VALUES ('NICOLAS_HEALTH', 'nicolas', 'My health')^;
 INSERT INTO c4d_topic (id, calendar_user, name) VALUES ('NICOLAS_CLIENTS', 'nicolas', 'Work time by client')^;
 INSERT INTO c4d_topic (id, calendar_user, name) VALUES ('ANNE_CLIENTS', 'anne', 'Work time by client')^;
+INSERT INTO c4d_topic (id, calendar_user, name) VALUES ('repo<Topic>', 'for', 'Admin')^;
 
 INSERT INTO c4d_calendar_user (user_name, password) VALUES ('n', '$2y$12$K3tLc8T8t1v5T4Jusij76.iVp92vT2owjef4komhSfioiw7iYI8ei')^;
 INSERT INTO c4d_calendar_user (user_name, password) VALUES ('a', '$2y$12$K3tLc8T8t1v5T4Jusij76.iVp92vT2owjef4komhSfioiw7iYI8ei')^;

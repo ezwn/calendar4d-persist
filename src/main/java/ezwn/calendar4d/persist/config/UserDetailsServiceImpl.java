@@ -26,11 +26,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		private CalendarUser calendarUser;
 		private Collection<? extends GrantedAuthority> grantedAuthorities;
 
-		public User(CalendarUser gourmet, List<String> roles) {
-			this.calendarUser = gourmet;
+		public User(CalendarUser calendarUser, List<String> roles) {
+			this.calendarUser = calendarUser;
 
-			grantedAuthorities = roles.stream().map(role -> new SimpleGrantedAuthority(role))
+			grantedAuthorities = roles.stream().map(role -> new SimpleGrantedAuthority("ROLE_" + role))
 					.collect(Collectors.toList());
+			
 		}
 
 		@Override
