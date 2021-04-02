@@ -28,7 +28,7 @@ public class SystemUserRoleRestController {
    }
    
    @CrossOrigin
-   @GetMapping("")
+   @GetMapping("find-all-by-user-id")
    Iterable<UserRoleDTO> findAllByUserId(@RequestParam String userId) {
       return entitiesDTOsMapper.toDTO(systemUserRoleService.findAllByUserId(userId));
    }

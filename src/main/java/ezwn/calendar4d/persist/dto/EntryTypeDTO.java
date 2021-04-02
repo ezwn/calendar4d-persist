@@ -32,7 +32,7 @@ public class EntryTypeDTO implements Serializable {
    @Size(max=64)
    String name;
    
-   String physicalActivity;
+   Integer energyPerHour;
    
 
 }

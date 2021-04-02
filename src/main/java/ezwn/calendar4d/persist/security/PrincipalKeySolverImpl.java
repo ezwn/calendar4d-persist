@@ -1,4 +1,4 @@
-package ezwn.calendar4d.persist.config;
+package ezwn.calendar4d.persist.security;
 
 import java.security.Principal;
 import java.util.Optional;

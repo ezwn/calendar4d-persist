@@ -1,4 +1,4 @@
-package ezwn.calendar4d.persist.config;
+package ezwn.calendar4d.persist.security;
 
 import java.util.Collection;
 import java.util.List;
@@ -23,15 +23,16 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 		private static final long serialVersionUID = 1L;
 
-		private CalendarUser calendarUser;
-		private Collection<? extends GrantedAuthority> grantedAuthorities;
+		private final Collection<? extends GrantedAuthority> grantedAuthorities;
+		private final String userName;
+		private final String password;
 
 		public User(CalendarUser calendarUser, List<String> roles) {
-			this.calendarUser = calendarUser;
-
 			grantedAuthorities = roles.stream().map(role -> new SimpleGrantedAuthority("ROLE_" + role))
 					.collect(Collectors.toList());
 			
+			this.password = calendarUser.getPassword();
+			this.userName = calendarUser.getUserName();
 		}
 
 		@Override
@@ -41,12 +42,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 		@Override
 		public String getPassword() {
-			return calendarUser.getPassword();
+			return password;
 		}
 
 		@Override
 		public String getUsername() {
-			return calendarUser.getUserName();
+			return userName;
 		}
 
 		@Override
@@ -67,14 +68,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		@Override
 		public boolean isEnabled() {
 			return true;
-		}
-
-		public CalendarUser getCalendarUser() {
-			return calendarUser;
-		}
-
-		public void setGourmet(CalendarUser calendarUser) {
-			this.calendarUser = calendarUser;
 		}
 	}
 

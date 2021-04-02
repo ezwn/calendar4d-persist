@@ -33,21 +33,21 @@ public class UserEntryRestController {
    }
    
    @CrossOrigin
-   @GetMapping("find-all-mine")
+   @GetMapping("mine")
    Iterable<EntryDTO> findAllMine(java.security.Principal principal) {
       final String calendarUser = principalKeySolver.principalKey(principal).get();
       return entitiesDTOsMapper.toDTO(userEntryService.findAllByCalendarUser(calendarUser));
    }
    
    @CrossOrigin
-   @GetMapping("find-all-mine-by-modification-time-after")
+   @GetMapping("mine/find-all-mine-by-modification-time-after")
    Iterable<EntryDTO> findAllMineByModificationTimeAfter(java.security.Principal principal, @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)java.time.LocalDateTime modificationTime) {
       final String calendarUser = principalKeySolver.principalKey(principal).get();
       return entitiesDTOsMapper.toDTO(userEntryService.findAllByCalendarUserAndModificationTimeAfter(calendarUser, modificationTime));
    }
    
    @CrossOrigin
-   @PostMapping("save-mine")
+   @PostMapping("mine")
    EntryDTO saveMine(java.security.Principal principal, @RequestBody EntryDTO entryDTO) {
       final var entry = entitiesDTOsMapper.toEntity(entryDTO);
       final String calendarUser = principalKeySolver.principalKey(principal).get();
@@ -63,7 +63,7 @@ public class UserEntryRestController {
    }
    
    @CrossOrigin
-   @DeleteMapping("delete-mine")
+   @DeleteMapping("mine")
    void deleteMine(java.security.Principal principal, @RequestBody EntryDTO entryDTO) {
       final var entry = entitiesDTOsMapper.toEntity(entryDTO);
       final String calendarUser = principalKeySolver.principalKey(principal).get();

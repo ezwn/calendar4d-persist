@@ -23,7 +23,7 @@ public class EntryTypeDTOMapper {
       entryType.setCalendarUser(entryTypeDTO.getCalendarUser());
       entryType.setEntryTypeClass(entryTypeDTO.getEntryTypeClass());
       entryType.setName(entryTypeDTO.getName());
-      entryType.setPhysicalActivity(entryTypeDTO.getPhysicalActivity());
+      entryType.setEnergyPerHour(entryTypeDTO.getEnergyPerHour());
       return entryType;
    }
    
@@ -38,7 +38,7 @@ public class EntryTypeDTOMapper {
       entryTypeDTO.setCalendarUser(entryType.getCalendarUser());
       entryTypeDTO.setEntryTypeClass(entryType.getEntryTypeClass());
       entryTypeDTO.setName(entryType.getName());
-      entryTypeDTO.setPhysicalActivity(entryType.getPhysicalActivity());
+      entryTypeDTO.setEnergyPerHour(entryType.getEnergyPerHour());
       return entryTypeDTO;
    }
    

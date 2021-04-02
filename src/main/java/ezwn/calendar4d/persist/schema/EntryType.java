@@ -45,8 +45,8 @@ public class EntryType implements Serializable {
    @Size(max=64)
    String name;
    
-   @Column(name = "physical_activity")
-   String physicalActivity;
+   @Column(name = "energy_per_hour")
+   Integer energyPerHour;
    
    
 }
