@@ -31,20 +31,20 @@ public class AdminEntryTypeRestController {
    
    @CrossOrigin
    @GetMapping("")
-   Iterable<EntryTypeDTO> findAll() {
+   public Iterable<EntryTypeDTO> findAll() {
       return entitiesDTOsMapper.toDTO(adminEntryTypeService.findAll());
    }
    
    @CrossOrigin
    @PostMapping("")
-   EntryTypeDTO save(@RequestBody EntryTypeDTO entryTypeDTO) {
+   public EntryTypeDTO save(@RequestBody EntryTypeDTO entryTypeDTO) {
       final var entryType = entitiesDTOsMapper.toEntity(entryTypeDTO);
       return entitiesDTOsMapper.toDTO(adminEntryTypeService.save(entryType));
    }
    
    @CrossOrigin
    @DeleteMapping("")
-   void delete(@RequestBody EntryTypeDTO entryTypeDTO) {
+   public void delete(@RequestBody EntryTypeDTO entryTypeDTO) {
       final var entryType = entitiesDTOsMapper.toEntity(entryTypeDTO);
       adminEntryTypeService.delete(entryType);
    }

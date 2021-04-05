@@ -30,14 +30,14 @@ public class SystemCalendarUserRestController {
    
    @CrossOrigin
    @PostMapping("")
-   CalendarUserDTO save(@RequestBody CalendarUserDTO calendarUserDTO) {
+   public CalendarUserDTO save(@RequestBody CalendarUserDTO calendarUserDTO) {
       final var calendarUser = entitiesDTOsMapper.toEntity(calendarUserDTO);
       return entitiesDTOsMapper.toDTO(systemCalendarUserService.save(calendarUser));
    }
    
    @CrossOrigin
    @GetMapping("")
-   CalendarUserDTO findByUserName(@RequestParam String userName) {
+   public CalendarUserDTO findByUserName(@RequestParam String userName) {
       return entitiesDTOsMapper.toDTO(systemCalendarUserService.findByUserName(userName));
    }
    

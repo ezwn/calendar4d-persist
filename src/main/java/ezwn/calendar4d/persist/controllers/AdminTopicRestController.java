@@ -31,20 +31,20 @@ public class AdminTopicRestController {
    
    @CrossOrigin
    @GetMapping("")
-   Iterable<TopicDTO> findAll() {
+   public Iterable<TopicDTO> findAll() {
       return entitiesDTOsMapper.toDTO(adminTopicService.findAll());
    }
    
    @CrossOrigin
    @PostMapping("")
-   TopicDTO save(@RequestBody TopicDTO topicDTO) {
+   public TopicDTO save(@RequestBody TopicDTO topicDTO) {
       final var topic = entitiesDTOsMapper.toEntity(topicDTO);
       return entitiesDTOsMapper.toDTO(adminTopicService.save(topic));
    }
    
    @CrossOrigin
    @DeleteMapping("")
-   void delete(@RequestBody TopicDTO topicDTO) {
+   public void delete(@RequestBody TopicDTO topicDTO) {
       final var topic = entitiesDTOsMapper.toEntity(topicDTO);
       adminTopicService.delete(topic);
    }

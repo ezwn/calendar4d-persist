@@ -6,12 +6,12 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import data.mng.lang.persist.services.PrincipalKeySolver;
 import ezwn.calendar4d.persist.repositories.SystemCalendarUserRepository;
 import ezwn.calendar4d.persist.schema.CalendarUser;
+import ezwn.persist.security.PrincipalSchemaAdapter;
 
 @Service
-public class PrincipalKeySolverImpl implements PrincipalKeySolver {
+public class PrincipalSchemaImpl implements PrincipalSchemaAdapter {
 	
 	@Autowired
 	private SystemCalendarUserRepository calendarUserRepository;

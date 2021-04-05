@@ -1,10 +1,10 @@
 package ezwn.calendar4d.persist.controllers;
 
-import data.mng.lang.persist.services.PrincipalKeySolver;
 import ezwn.calendar4d.persist.dto.EntryTypeDTO;
 import ezwn.calendar4d.persist.mappers.EntryTypeDTOMapper;
 import ezwn.calendar4d.persist.schema.EntryType;
 import ezwn.calendar4d.persist.services.UserEntryTypeService;
+import ezwn.persist.security.PrincipalSchemaAdapter;
 import javax.annotation.security.RolesAllowed;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
@@ -24,34 +24,34 @@ public class UserEntryTypeRestController {
    
    private final UserEntryTypeService userEntryTypeService;
    private final EntryTypeDTOMapper entitiesDTOsMapper;
-   private final PrincipalKeySolver principalKeySolver;
+   private final PrincipalSchemaAdapter principalSchemaAdapter;
    
-   public UserEntryTypeRestController(final EntryTypeDTOMapper entitiesDTOsMapper, final UserEntryTypeService userEntryTypeService, final PrincipalKeySolver principalKeySolver) {
+   public UserEntryTypeRestController(final EntryTypeDTOMapper entitiesDTOsMapper, final UserEntryTypeService userEntryTypeService, final PrincipalSchemaAdapter principalSchemaAdapter) {
       this.userEntryTypeService = userEntryTypeService;
       this.entitiesDTOsMapper = entitiesDTOsMapper;
-      this.principalKeySolver = principalKeySolver;
+      this.principalSchemaAdapter = principalSchemaAdapter;
    }
    
    @CrossOrigin
    @GetMapping("mine")
-   Iterable<EntryTypeDTO> findAllMine(java.security.Principal principal) {
-      final String calendarUser = principalKeySolver.principalKey(principal).get();
+   public Iterable<EntryTypeDTO> findAllMine(java.security.Principal principal) {
+      final String calendarUser = principalSchemaAdapter.principalKey(principal).get();
       return entitiesDTOsMapper.toDTO(userEntryTypeService.findAllByCalendarUser(calendarUser));
    }
    
    @CrossOrigin
    @PostMapping("mine")
-   EntryTypeDTO saveMine(java.security.Principal principal, @RequestBody EntryTypeDTO entryTypeDTO) {
+   public EntryTypeDTO saveMine(java.security.Principal principal, @RequestBody EntryTypeDTO entryTypeDTO) {
       final var entryType = entitiesDTOsMapper.toEntity(entryTypeDTO);
-      final String calendarUser = principalKeySolver.principalKey(principal).get();
+      final String calendarUser = principalSchemaAdapter.principalKey(principal).get();
       return entitiesDTOsMapper.toDTO(userEntryTypeService.save(entryType));
    }
    
    @CrossOrigin
    @DeleteMapping("mine")
-   void deleteMine(java.security.Principal principal, @RequestBody EntryTypeDTO entryTypeDTO) {
+   public void deleteMine(java.security.Principal principal, @RequestBody EntryTypeDTO entryTypeDTO) {
       final var entryType = entitiesDTOsMapper.toEntity(entryTypeDTO);
-      final String calendarUser = principalKeySolver.principalKey(principal).get();
+      final String calendarUser = principalSchemaAdapter.principalKey(principal).get();
       userEntryTypeService.delete(entryType);
    }
    

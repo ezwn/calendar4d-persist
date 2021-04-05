@@ -31,27 +31,27 @@ public class AdminEntryRestController {
    
    @CrossOrigin
    @GetMapping("")
-   Iterable<EntryDTO> findAll() {
+   public Iterable<EntryDTO> findAll() {
       return entitiesDTOsMapper.toDTO(adminEntryService.findAll());
    }
    
    @CrossOrigin
    @PostMapping("")
-   EntryDTO save(@RequestBody EntryDTO entryDTO) {
+   public EntryDTO save(@RequestBody EntryDTO entryDTO) {
       final var entry = entitiesDTOsMapper.toEntity(entryDTO);
       return entitiesDTOsMapper.toDTO(adminEntryService.save(entry));
    }
    
    @CrossOrigin
    @PostMapping("save-all")
-   Iterable<EntryDTO> saveAll(@RequestBody Iterable<EntryDTO> entryDTO) {
+   public Iterable<EntryDTO> saveAll(@RequestBody Iterable<EntryDTO> entryDTO) {
       final var entry = entitiesDTOsMapper.toEntity(entryDTO);
       return entitiesDTOsMapper.toDTO(adminEntryService.saveAll(entry));
    }
    
    @CrossOrigin
    @DeleteMapping("")
-   void delete(@RequestBody EntryDTO entryDTO) {
+   public void delete(@RequestBody EntryDTO entryDTO) {
       final var entry = entitiesDTOsMapper.toEntity(entryDTO);
       adminEntryService.delete(entry);
    }

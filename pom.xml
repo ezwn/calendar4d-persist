@@ -22,7 +22,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>ezwn</groupId>
-			<artifactId>data-mng-lang-persist-common</artifactId>
+			<artifactId>ezwn-persist-common</artifactId>
 			<version>0.2.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>

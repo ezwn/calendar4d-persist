@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import data.mng.lang.persist.controllers.ServiceInfoController;
+import ezwn.persist.service.info.ServiceInfoController;
 
 @SpringBootTest
 public class ApplicationTest {
