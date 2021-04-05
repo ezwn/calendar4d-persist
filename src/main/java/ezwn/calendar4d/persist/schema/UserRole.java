@@ -16,15 +16,11 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "topic")
+@Table(name = "user_role")
 @Valid
-public class Topic implements Serializable {
+public class UserRole implements Serializable {
    
    private static final long serialVersionUID = 1L;
-
-   public boolean belongsTo(String calendarUser) {
-      return this.calendarUser!=null && this.calendarUser.equals(calendarUser);
-   }
 
    @Id
    @Column(name = "id")
@@ -32,14 +28,13 @@ public class Topic implements Serializable {
    @Size(max=16)
    String id;
    
-   @Column(name = "calendar_user")
+   @Column(name = "user_id")
    @NotNull
-   String calendarUser;
+   String userId;
    
-   @Column(name = "name")
+   @Column(name = "role")
    @NotNull
-   @Size(max=64)
-   String name;
+   String role;
    
    
 }

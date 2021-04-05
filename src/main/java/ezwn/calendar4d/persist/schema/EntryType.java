@@ -22,6 +22,10 @@ public class EntryType implements Serializable {
    
    private static final long serialVersionUID = 1L;
 
+   public boolean belongsTo(String calendarUser) {
+      return this.calendarUser!=null && this.calendarUser.equals(calendarUser);
+   }
+
    @Id
    @Column(name = "id")
    @NotNull
@@ -41,8 +45,8 @@ public class EntryType implements Serializable {
    @Size(max=64)
    String name;
    
-   @Column(name = "physical_activity")
-   String physicalActivity;
+   @Column(name = "energy_per_hour")
+   Integer energyPerHour;
    
    
 }
